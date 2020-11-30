@@ -3,19 +3,12 @@
       :collapse="!collapseOnScroll"
       :collapse-on-scroll="collapseOnScroll"
       absolute
-      color="deep-purple accent-4"
+      color="black"
       dark
       scroll-target="#scrolling-techniques-6"
   >
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
-    <v-img
-        class="logo"
-        src="@/assets/didier.png"
-        aspect-ratio="1.0"
-        contain
-        height="70px"
-        width="auto"
-    ></v-img>
+    <img src="@/assets/didier.png" alt="" class="logo">
     <v-toolbar-title>NOMeetic</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn
@@ -45,7 +38,8 @@ export default {
 
 <style scoped>
 .logo{
-  margin-left: -30%;
-  margin-right: -29%;
+  height: 100%;
+  width: auto;
+  margin-right: 1%;
 }
 </style>
