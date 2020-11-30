@@ -5,9 +5,10 @@
 <script>
 // @ is an alias to /src
 import Home from '@/components/Home.vue'
+//import Header from "@/components/Header";
 
 export default {
-  name: 'Home',
+  name: 'Homepage',
   components: {
     Home
   }
