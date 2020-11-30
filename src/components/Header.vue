@@ -15,6 +15,7 @@
         elevation="1"
         rounded
         color="primary"
+        @click="signin"
     >Sign-In</v-btn>
     <v-btn
         elevation="1"
@@ -27,6 +28,12 @@
 <script>
 export default {
   name: "Header",
+
+  methods: {
+    signin(){
+      this.$router.push('/signin')
+    },
+  },
 
   data: function () {
     return {
