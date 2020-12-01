@@ -24,24 +24,40 @@
     <!--step 1-->
     <v-stepper-content step="1" row>
       <h2>Etape 1</h2>
-      <p>Pseudo</p>
-      <v-text-field
-          placeholder="Pseudo"
-          filled
-          v-model="nickname"
-      ></v-text-field>
-      <p>Adresse mail</p>
-      <v-text-field
-          placeholder="xxx@xxx.xx"
-          filled
-          v-model="mail"
-      ></v-text-field>
-      <p>Mot de passe</p>
-      <v-text-field
-          placeholder="mot de passe"
-          filled
-          v-model="password"
-      ></v-text-field>
+      <v-flex offset-md-3 xs6>
+        <v-text-field
+            v-model="username"
+            :value="username"
+            label="Enter Username"
+            hint="Min. 3 characters. Max. 28 characters. Special character not allowed"
+            :rules="[rules.username]"
+        ></v-text-field>
+        <v-text-field
+            v-model="mail"
+            :value="mail"
+            label="Enter Email Address"
+            hint="Enter a valid email address"
+            :rules="[rules.mail]"
+        ></v-text-field>
+        <v-text-field
+            v-model="password"
+            :value="password"
+            label="Enter password"
+            hint="Min. 8 characters with at least one lowercase, one uppercase and a number."
+            :append-icon="valuePass ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="() => (valuePass = !valuePass)"
+            :type="valuePass ? 'password' : 'text'"
+            :rules="[rules.password]"
+        ></v-text-field>
+        <v-text-field
+            label="Confirm password"
+            hint="Enter same password"
+            :append-icon="valuePass2 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="() => (valuePass2 = !valuePass2)"
+            :type="valuePass2 ? 'password' : 'text'"
+            :rules="[rules.confirmPassword]"
+        ></v-text-field>
+      </v-flex>
     </v-stepper-content>
     <!--step 2-->
     <v-stepper-content step="2">
@@ -180,17 +196,50 @@ name: "SignIn",
           'illuminati',
       ],
       picker: new Date().toISOString().substr(0, 10),
-      lastname: 'lastname',
-      firstname: 'firstname',
-      nickname: 'nickname',
-      mail: 'mail',
-      password: 'password',
-      sex: 'not specified',
+      lastname: null,
+      firstname: null,
+      username: null,
+      mail: null,
+      password: null,
+      sex: null,
+      valid: null,
+      valuePass: null,
+      valuePass2: null,
+      rules: {
+        required: value => !!value || "Required.",
+        password: value => {
+          const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+          return (
+              pattern.test(value) ||
+              "Min. 8 characters with at least one lowercase, one uppercase and a number."
+          );
+        },
+        username: value => {
+          const pattern = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{2,29}$/;
+          return (
+              pattern.test(value) ||
+              "Min. 3 characters. Max. 28 characters. Special character not allowed"
+          );
+        },
+        mail: value => {
+          const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+[\w-]{1,5}$/;
+          return (
+              pattern.test(value) ||
+              "Enter a valid email address"
+          );
+        },
+        confirmPassword: value => {
+          if (value === this.password){
+            return true
+          }else{
+            return false
+          }
+        }
+      }
     }
   }
 }
 </script>
-
 <style scoped>
 
 </style>
