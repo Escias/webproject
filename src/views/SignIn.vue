@@ -25,23 +25,21 @@
     <v-stepper-content step="1" row>
       <h2>Etape 1</h2>
       <v-flex offset-md-3 xs6>
+        <h3 class="display-error" id="E1"></h3>
         <v-text-field
             v-model="username"
-            :value="username"
             label="Enter Username"
-            hint="Min. 3 characters. Max. 28 characters. Special character not allowed"
+            hint="Min. 3 characters. Max. 15 characters. Special character not allowed"
             :rules="[rules.username]"
         ></v-text-field>
         <v-text-field
             v-model="mail"
-            :value="mail"
             label="Enter Email Address"
             hint="Enter a valid email address"
             :rules="[rules.mail]"
         ></v-text-field>
         <v-text-field
             v-model="password"
-            :value="password"
             label="Enter password"
             hint="Min. 8 characters with at least one lowercase, one uppercase and a number."
             :append-icon="valuePass ? 'mdi-eye' : 'mdi-eye-off'"
@@ -62,46 +60,46 @@
     <!--step 2-->
     <v-stepper-content step="2">
       <h2>Etape 2</h2>
-      <v-avatar>
-        <img src="@/assets/alien.png" alt="">
-      </v-avatar>
-      <p>Image de profil</p>
-      <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
-      <p>Prénom</p>
-      <v-text-field
-          placeholder="Prénom"
-          filled
+      <v-flex offset-md-3 xs6>
+        <v-avatar>
+          <img src="@/assets/alien.png" alt="">
+        </v-avatar>
+        <p>Image de profil</p>
+        <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+        <v-text-field
+          label="Firstname"
           v-model="firstname"
-      ></v-text-field>
-      <p>Nom</p>
-      <v-text-field
-          placeholder="Nom"
-          filled
+          :rules="[rules.name]"
+        ></v-text-field>
+        <v-text-field
+          label="Lastname"
           v-model="lastname"
-      ></v-text-field>
-      <p>Sexe</p>
-      <v-radio-group
+          :rules="[rules.name]"
+        ></v-text-field>
+        <p>Sex</p>
+        <v-radio-group
           row
           v-model="sex"
-      >
-        <v-radio
-            label="Homme"
-            id="radio"
         >
-        </v-radio>
-        <v-radio
-            label="Femme"
+          <v-radio
+            label="Male"
             id="radio"
-        >
-        </v-radio>
-        <v-radio
-            label="Non spécifié"
+          >
+          </v-radio>
+          <v-radio
+            label="Female"
             id="radio"
-        >
-        </v-radio>
-      </v-radio-group>
-      <p>Date de naissance</p>
-      <v-date-picker v-model="picker"></v-date-picker>
+          >
+          </v-radio>
+          <v-radio
+            label="Not specified"
+            id="radio"
+          >
+          </v-radio>
+        </v-radio-group>
+        <p>Date de naissance</p>
+        <v-date-picker v-model="picker"></v-date-picker>
+      </v-flex>
     </v-stepper-content>
     <!--step 3-->
     <v-stepper-content step="3">
@@ -138,7 +136,6 @@
         Suivant
       </v-btn>
     </v-footer>
-
   </v-stepper>
 </template>
 
@@ -164,24 +161,27 @@ name: "SignIn",
       this.display()
       if (this.e1 === 3){
         this.$router.push('/')
-      }else{
-        this.e1++
+      }else if (this.e1 === 1){
+        if (this.rules.username===true && this.rules.mail===true && this.rules.confirmPassword===true){
+          this.e1++
+        }else{
+          document.getElementById('E1').innerHTML = "Complete all fields"
+        }
       }
     },
     display(){
-      console.log(this.nickname)
-      console.log(this.mail)
-      console.log(this.password)
-      console.log(this.firstname)
-      console.log(this.lastname)
-      console.log(this.sex)
-      console.log(this.picker)
+      console.log("Username")
+      console.log(this.rules.username())
+      console.log("Mail")
+      console.log(this.rules.mail())
+      console.log("Password")
+      console.log(this.rules.confirmPassword())
     }
   },
 
   data: function () {
     return {
-      e1: 1,
+      e1: 2,
       dropzoneOptions: {
         dictDefaultMessage: 'Glisser et déposer vos fichier ici',
         url: 'https://httpbin.org/post',
@@ -196,37 +196,30 @@ name: "SignIn",
           'illuminati',
       ],
       picker: new Date().toISOString().substr(0, 10),
-      lastname: null,
-      firstname: null,
-      username: null,
-      mail: null,
-      password: null,
-      sex: null,
-      valid: null,
-      valuePass: null,
-      valuePass2: null,
+      lastname: "",
+      firstname: "",
+      username: "",
+      mail: "",
+      password: "",
+      sex: "",
+      valid: true,
+      valuePass: true,
+      valuePass2: true,
       rules: {
-        required: value => !!value || "Required.",
-        password: value => {
-          const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-          return (
-              pattern.test(value) ||
-              "Min. 8 characters with at least one lowercase, one uppercase and a number."
-          );
-        },
-        username: value => {
-          const pattern = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{2,29}$/;
-          return (
-              pattern.test(value) ||
-              "Min. 3 characters. Max. 28 characters. Special character not allowed"
-          );
+        username: () => {
+          if (this.username.length>=3 && this.username.length<=15 && this.username.match(/[a-z]/i)){
+            return true
+          }else{
+            return false
+          }
         },
         mail: value => {
           const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+[\w-]{1,5}$/;
-          return (
-              pattern.test(value) ||
-              "Enter a valid email address"
-          );
+          return pattern.test(value)
+        },
+        password: value => {
+          const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+          return pattern.test(value)
         },
         confirmPassword: value => {
           if (value === this.password){
@@ -234,12 +227,23 @@ name: "SignIn",
           }else{
             return false
           }
+        },
+        name: value => {
+          if (value === ''){
+            return false
+          }else{
+            return true
+          }
         }
       }
     }
   }
 }
+// ^(?=.*[a-zA-Z]{1})([a-zA-Z0-9]{3,15})$
 </script>
-<style scoped>
 
+<style scoped>
+.display-error{
+  color: red;
+}
 </style>
