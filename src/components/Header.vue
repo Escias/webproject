@@ -1,9 +1,7 @@
 <template>
   <v-app-bar
-      :collapse="!collapseOnScroll"
-      :collapse-on-scroll="collapseOnScroll"
-      absolute
-      color="deep-purple accent-4"
+      dense
+      color="black"
       dark
       scroll-target="#scrolling-techniques-6"
   >
