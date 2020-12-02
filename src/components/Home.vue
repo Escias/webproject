@@ -1,18 +1,20 @@
 <template>
   <div>
     <Header/>
-    <div id="HomePage">
-      <h1>ComploMeet</h1>
-      <br/>
-      Hello and Welcome to the new meet experience, have you ever wondered
-      <br/>
-      “how can I find a person who is aware of all the lie that the world government is delivering to us?”.
-      <br/>
-      Here you are, this is the place where you can find a person who really matches you.
-      <br/>
-      Go on and register 😊.
+    <div>
+        <div  id="Text">
+        <h1>ComploMeet</h1>
+        <br/>
+        Hello and Welcome to the new meet experience, have you ever wondered
+        <br/>
+        “how can I find a person who is aware of all the lie that the world government is delivering to us?”.
+        <br/>
+        Here you are, this is the place where you can find a person who really matches you.
+        <br/>
+        Go on and register 😊.
+      </div>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -30,17 +32,10 @@ export default {
 </script>
 
 <style scoped>
-template {
 
-}
-
-#HomePage {
+#Text {
   position: absolute;
   top: 50%;
   left: 35%;
-}
-
-#Text {
-
 }
 </style>
