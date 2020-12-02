@@ -1,5 +1,12 @@
 <template>
+  <div>
     <Header/>
+    <div id="HomePage">
+      <div id="Text">
+        <h1>HOME</h1>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -16,5 +23,9 @@ export default {
 </script>
 
 <style scoped>
-
+#Text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
 </style>
