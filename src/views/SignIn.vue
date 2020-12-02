@@ -255,7 +255,7 @@ name: "SignIn",
 
   data: function () {
     return {
-      e1: 3,
+      e1: 1,
       dropzoneOptions: {
         maxFiles: 1,
         url: 'https://httpbin.org/post',
