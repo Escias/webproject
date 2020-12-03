@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Header/>
-    <div>
+    <Header style="z-index: 99"/>
+    <div id="bg">
         <div  id="Text">
         <h1>ComploMeet</h1>
         <br/>
@@ -32,7 +32,17 @@ export default {
 </script>
 
 <style scoped>
-
+#bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url('../assets/bg.png') no-repeat center center;
+  background-size: cover;
+  transform: scale(1.1);
+  z-index: 1;
+}
 #Text {
   position: absolute;
   top: 50%;
