@@ -1,31 +1,78 @@
 <template>
   <div>
-    <Header/>
-    <div id="HomePage">
-      <div id="Text">
-        <h1>HOME</h1>
-      </div>
+    <Header style="z-index: 99"/>
+    <div id="bg">
+      <v-container
+          fill-height
+          fluid
+      >
+        <v-col
+            :align="alignment"
+            :justify="justify"
+        >
+          <div id="Text">
+            <h1>ComploMeet</h1>
+            <br/>
+            Hello and Welcome to the new meet experience, have you ever wondered
+            <br/>
+            “how can I find a person who is aware of all the lie that the world government is delivering to us?”.
+            <br/>
+            Here you are, this is the place where you can find a person who really matches you.
+            <br/>
+            Go on and register 😊.
+          </div><br/>
+        </v-col>
+      </v-container>
     </div>
+    <Footer style="z-index: 98" id="footer"/>
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header";
-//import Footer from "@/components/Footer";
-
+import Footer from "@/components/Footer";
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
   name: "Home",
-  components:{
+  components: {
     Header,
-    //Footer
+    Footer
+  },
+  data () {
+    return {
+      alignment: 'center',
+      justify: 'center'
+    }
   },
 }
+
+/*#Text {
+  background: coral;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+}*/
 </script>
 
 <style scoped>
-#Text{
+#bg {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
+  background: url('../assets/bg.png') no-repeat center center;
+  background-size: cover;
+  transform: scale(1.1);
+  z-index: 1;
+}
+#Text {
+  background: coral;
+}
+#footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 </style>
