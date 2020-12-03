@@ -1,43 +1,42 @@
 <template>
-  <v-app-bar
-      :collapse="!collapseOnScroll"
-      :collapse-on-scroll="collapseOnScroll"
-      absolute
-      color="deep-purple accent-4"
-      dark
-      scroll-target="#scrolling-techniques-6"
-  >
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
-    <v-img
-        class="logo"
-        src="@/assets/didier.png"
-        aspect-ratio="1.0"
-        contain
-        height="70px"
-        width="auto"
-    ></v-img>
-    <v-toolbar-title>NOMeetic</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-btn
-        elevation="1"
-        rounded
-        color="primary"
-    >Sign-In</v-btn>
-    <v-btn
-        elevation="1"
-        rounded
-        color="primary"
-    >Sign-Up</v-btn>
-  </v-app-bar>
+    <v-app-bar
+        dense
+        color="black"
+        dark
+        scroll-target="#scrolling-techniques-6"
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <img src="@/assets/didier.png" alt="" class="logo">
+      <v-toolbar-title>NOMeetic</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+          elevation="1"
+          rounded
+          color="primary"
+          @click="signin"
+      >Sign-In</v-btn>
+      <v-btn
+          elevation="1"
+          rounded
+          color="primary"
+      >Sign-Up</v-btn>
+    </v-app-bar>
+
 </template>
 
 <script>
 export default {
   name: "Header",
 
+  methods: {
+    signin(){
+      this.$router.push('/signin')
+    },
+  },
+
   data: function () {
     return {
-      collapseOnScroll: true,
+
     }
   }
 }
@@ -45,7 +44,8 @@ export default {
 
 <style scoped>
 .logo{
-  margin-left: -30%;
-  margin-right: -29%;
+  height: 100%;
+  width: auto;
+  margin-right: 1%;
 }
 </style>
