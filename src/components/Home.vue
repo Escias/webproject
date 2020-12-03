@@ -2,6 +2,14 @@
   <div>
     <Header style="z-index: 99"/>
     <div id="bg">
+      <v-container
+          fill-height
+          fluid
+      >
+        <v-col
+            :align="alignment"
+            :justify="justify"
+        >
         <div  id="Text">
         <h1>ComploMeet</h1>
         <br/>
@@ -13,6 +21,36 @@
         <br/>
         Go on and register 😊.
       </div>
+          <br/>
+          <p id="presentation">Retrouvez des profils utilisateur :) </p>
+      <div id="person">
+        <div class="card">
+          <img class="photo" src="../assets/MichelDrucker.jpg" >
+          <p>Michel</p>
+          <br/>
+          <p>54 ans</p>
+          <br/>
+          <p>Platiste</p>
+        </div>
+        <div class="card" >
+          <img class="photo" src="../assets/MichelDrucker.jpg" >
+          <p>Michel</p>
+          <br/>
+          <p>54 ans</p>
+          <br/>
+          <p>Platiste</p>
+        </div>
+        <div class="card" >
+          <img class="photo" src="../assets/MichelDrucker.jpg">
+          <p>Michel</p>
+          <br/>
+          <p>54 ans</p>
+          <br/>
+          <p>Platiste</p>
+        </div>
+      </div>
+        </v-col>
+      </v-container>
       </div>
     </div>
 </template>
@@ -28,6 +66,12 @@ export default {
     Header,
     //Footer
   },
+  data () {
+    return {
+      alignment: 'center',
+      justify: 'center'
+    }
+  },
 }
 </script>
 
@@ -41,11 +85,29 @@ export default {
   background: url('../assets/bg.png') no-repeat center center;
   background-size: cover;
   transform: scale(1.1);
-  z-index: 1;
+  z-index: 0;
 }
 #Text {
-  position: absolute;
-  top: 50%;
-  left: 35%;
+  background-color: coral;
+
+}
+#presentation{
+  background-color: #314b5f;
+}
+#person{
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 5;
+}
+.photo {
+  z-index: 5;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.card{
+  background-color: #00b782;
+  width: 30%;
 }
 </style>
