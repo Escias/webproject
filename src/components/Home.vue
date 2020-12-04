@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header style="z-index: 99"/>
     <div id="bg">
       <v-container
           fill-height
@@ -52,25 +51,14 @@
         </v-col>
       </v-container>
       </div>
-      <Footer style="z-index: 98" id="footer"/>
     </div>
 </template>
 
 <script>
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
   name: "Home",
   components: {
-    Header,
-    Footer
-  },
-  data () {
-    return {
-      alignment: 'center',
-      justify: 'center'
-    }
   },
   data () {
     return {
