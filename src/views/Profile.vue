@@ -1,13 +1,16 @@
 <template>
- <ProfileInfo/>
+  <div>
+    <ProfileConfig/>
+  </div>
 </template>
 
 <script>
-import ProfileInfo from "@/components/ProfileInfo";
+import ProfileConfig from "@/components/ProfileConfig";
+
 export default {
 name: "Profile",
   components: {
-   ProfileInfo,
+    ProfileConfig,
   }
 }
 </script>

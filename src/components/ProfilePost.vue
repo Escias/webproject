@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="profile">
-      <v-avatar size="128">
+      <v-avatar>
         <img src="@/assets/alien.png" alt="">
       </v-avatar>
       <v-dialog
