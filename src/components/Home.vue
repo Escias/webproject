@@ -53,7 +53,6 @@
       </div>
       <Footer style="z-index: 98" id="footer"/>
     </div>
-  </div>
 </template>
 
 <script>
@@ -61,12 +60,6 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
   name: "Home",
   components: {
-  },
-  data () {
-    return {
-      alignment: 'center',
-      justify: 'center'
-    }
   },
   data () {
     return {
