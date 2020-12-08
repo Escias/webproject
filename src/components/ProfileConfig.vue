@@ -26,13 +26,13 @@
               <br/>
               <v-btn x-large class="menu" text @click="swapComponent('post')">Post</v-btn>
               <br/>
-              <v-btn x-large class="menu" text>Contact</v-btn>
+              <v-btn x-large class="menu" text @click="swapComponent('contact')">Contact</v-btn>
               <br/>
-              <v-btn x-large class="menu" text>Chat</v-btn>
+              <v-btn x-large class="menu" text @click="swapComponent('chat')">Chat</v-btn>
               <br/>
-              <v-btn x-large class="menu" text>Security</v-btn>
+              <v-btn x-large class="menu" text @click="swapComponent('security')">Security</v-btn>
               <br/>
-              <v-btn x-large class="menu" text>Log-Out</v-btn>
+              <v-btn x-large class="menu" color="error">Log-Out</v-btn>
             </div>
           </v-col>
         </v-container>
@@ -49,12 +49,7 @@
           shaped
           height="135%"
       >
-        <v-container
-            fill-height
-            fluid
-        >
-          <div :is="currentComponent"></div>
-        </v-container>
+        <div :is="currentComponent"></div>
       </v-card>
     </v-col>
   </v-row>
@@ -63,6 +58,9 @@
 <script>
 import ProfileInfo from "@/components/ProfileInfo";
 import ProfilePost from "@/components/ProfilePost";
+import ProfileContact from "@/components/ProfileContact";
+import ProfileChat from "@/components/ProfileChat";
+import ProfileSecurity from "@/components/ProfileSecurity";
 
 export default {
   name: "ProfileConfig",
@@ -70,6 +68,9 @@ export default {
   components: {
     info: ProfileInfo,
     post: ProfilePost,
+    contact: ProfileContact,
+    chat: ProfileChat,
+    security: ProfileSecurity,
   },
 
   methods: {
