@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header style="z-index: 99"/>
     <div id="bg">
       <v-container
           fill-height
@@ -54,17 +53,14 @@
       </div>
       <Footer style="z-index: 98" id="footer"/>
     </div>
+  </div>
 </template>
 
 <script>
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
   name: "Home",
   components: {
-    Header,
-    Footer
   },
   data () {
     return {
@@ -79,13 +75,6 @@ export default {
     }
   },
 }
-
-/*#Text {
-  background: coral;
-  position: absolute;
-  top: 50%;
-  left: 35%;
-}*/
 </script>
 
 <style scoped>
@@ -122,11 +111,5 @@ export default {
 .card{
   background-color: #00b782;
   width: 30%;
-}
-#footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 </style>

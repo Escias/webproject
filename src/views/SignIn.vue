@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header/>
     <v-stepper v-model="e1">
       <!--header-->
       <v-stepper-header>
@@ -167,10 +166,12 @@
               ></v-text-field>
             </template>
             <v-date-picker
+                ref="picker"
                 v-model="date"
                 :max="new Date().toISOString().substr(0,10)"
                 min="1900-01-01"
                 @input="menu = false"
+                :rules="[rules.name(date)]"
             ></v-date-picker>
           </v-menu>
           <!--<v-date-picker v-model="picker"></v-date-picker>-->
@@ -213,22 +214,17 @@
         </v-btn>
       </v-footer>
     </v-stepper>
-    <Footer/>
   </div>
 </template>
 
 <script>
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 export default {
 name: "SignIn",
   components: {
     vueDropzone: vue2Dropzone,
-    Header,
-    Footer,
   },
 
   methods:{
@@ -258,6 +254,12 @@ name: "SignIn",
     display(){
       console.log(this.interest)
     },
+  },
+
+  watch: {
+    menu (val) {
+      val && setTimeout(()=>(this.$refs.picker.activePicker = 'YEAR'))
+    }
   },
 
   data: function () {
@@ -290,7 +292,7 @@ name: "SignIn",
       password: "",
       password2: "",
       sex: "",
-      date: new Date().toISOString().substr(0, 10),
+      date: "",
       interest: "",
       menu: false,
       valid: true,
