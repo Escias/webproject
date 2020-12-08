@@ -20,6 +20,7 @@
           elevation="1"
           rounded
           color="primary"
+          @click="signup"
       >Sign-Up</v-btn>
     </v-app-bar>
     <v-navigation-drawer
@@ -65,6 +66,9 @@ export default {
   methods: {
     signin(){
       this.$router.push('/signin')
+    },
+    signup(){
+      this.$router.push('/signup')
     },
   },
 

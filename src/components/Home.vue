@@ -80,9 +80,28 @@ export default {
   background: url('../assets/bg.png') no-repeat center center;
   background-size: cover;
   transform: scale(1.1);
-  z-index: 1;
+  z-index: 0;
 }
 #Text {
-  background: coral;
+  background-color: coral;
+}
+#presentation{
+  background-color: #314b5f;
+}
+#person{
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 5;
+}
+.photo {
+  z-index: 5;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.card{
+  background-color: #00b782;
+  width: 30%;
 }
 </style>
