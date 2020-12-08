@@ -8,7 +8,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <img src="@/assets/didier.png" alt="" class="logo">
-      <v-toolbar-title>NOMeetic</v-toolbar-title>
+      <v-btn text @click="home"><v-toolbar-title>NOMeetic</v-toolbar-title></v-btn>
       <v-spacer></v-spacer>
       <v-btn
           elevation="1"
@@ -64,6 +64,9 @@ export default {
   name: "Header",
 
   methods: {
+    home(){
+      this.$router.push('/')
+    },
     signin(){
       this.$router.push('/signin')
     },

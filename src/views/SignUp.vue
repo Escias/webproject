@@ -31,13 +31,13 @@
               v-model="username"
               label="Enter Username"
               hint="Min. 3 characters. Max. 15 characters. Special character not allowed"
-              :rules="[rules.username(username)]"
+              :rules="[checkusername()]"
           ></v-text-field>
           <v-text-field
               v-model="mail"
               label="Enter Email Address"
               hint="Enter a valid email address"
-              :rules="[rules.mail(mail)]"
+              :rules="[checkmail(mail)]"
           ></v-text-field>
           <v-text-field
               v-model="password"
@@ -46,7 +46,7 @@
               :append-icon="valuePass ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="() => (valuePass = !valuePass)"
               :type="valuePass ? 'password' : 'text'"
-              :rules="[rules.password(password)]"
+              :rules="[checkpassword(password)]"
           ></v-text-field>
           <v-text-field
               v-model="password2"
@@ -55,7 +55,7 @@
               :append-icon="valuePass2 ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="() => (valuePass2 = !valuePass2)"
               :type="valuePass2 ? 'password' : 'text'"
-              :rules="[rules.confirmPassword(password2)]"
+              :rules="[checkconfirmPassword(password2)]"
           ></v-text-field>
         </v-flex>
       </v-stepper-content>
@@ -116,12 +116,12 @@
           <v-text-field
               label="Firstname"
               v-model="firstname"
-              :rules="[rules.name]"
+              :rules="[checkname]"
           ></v-text-field>
           <v-text-field
               label="Lastname"
               v-model="lastname"
-              :rules="[rules.name]"
+              :rules="[checkname]"
           ></v-text-field>
           <p>Sex</p>
           <v-radio-group
@@ -171,7 +171,7 @@
                 :max="new Date().toISOString().substr(0,10)"
                 min="1900-01-01"
                 @input="menu = false"
-                :rules="[rules.name(date)]"
+                :rules="[checkname(date)]"
             ></v-date-picker>
           </v-menu>
           <!--<v-date-picker v-model="picker"></v-date-picker>-->
@@ -179,10 +179,21 @@
       </v-stepper-content>
       <!--step 3-->
       <v-stepper-content step="3">
-        <p>Centre d'intérêt(s)</p>
+        <p>Sexual Orientation</p>
         <v-col cols="8">
           <v-combobox
-              label="ajouter un centre d'intérêt"
+              label="pick your sexual orientation"
+              :items="sexual"
+              hide-selected
+              chips
+              deletable-chips
+              v-model="sexorient"
+          ></v-combobox>
+        </v-col>
+        <p>Center of interest</p>
+        <v-col cols="8">
+          <v-combobox
+              label="add center of interest"
               :items="tags"
               hide-selected
               multiple
@@ -236,7 +247,6 @@ name: "SignUp",
       }
     },
     nextbtn(){
-      this.display()
       if (this.e1 === 3){
         this.$router.push('/')
       }else if (this.e1 === 1){
@@ -251,8 +261,37 @@ name: "SignUp",
         }
       }
     },
-    display(){
-      console.log(this.interest)
+    checkusername(){
+      if (this.username.length>=3 && this.username.length<=15 && this.username.match(/[a-z]/i)){
+        this.check.userCheck = true
+        return true
+      }else{
+        return false
+      }
+    },
+    checkmail(value){
+      const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+[\w-]{1,5}$/i;
+      this.check.mailCheck = pattern.test(value)
+      return pattern.test(value)
+    },
+    checkpassword(value){
+      const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/i;
+      return pattern.test(value)
+    },
+    checkconfirmPassword(value){
+      if (value === this.password){
+        this.check.passCheck = true
+        return true
+      }else{
+        return false
+      }
+    },
+    checkname(value){
+      if (value === ''){
+        return false
+      }else{
+        return true
+      }
     },
   },
 
@@ -273,11 +312,24 @@ name: "SignUp",
         maxFilesize: 5,
         addRemoveLinks: true,
       },
+      sexual: [
+        'Asexual',
+        'Bisexual',
+        'Heterosexual',
+        'Homosexual',
+        'Androphilia',
+        'Gynephilia',
+        'Bi-curious',
+        'Gray asexuality',
+        'Non-heterosexual',
+        'Pansexuality',
+        'Queer',
+      ],
       tags: [
-        'anti-vacc',
+        'antivax',
         'anti-covid',
         '5G',
-        'terre plate',
+        'flat earth',
         'illuminati',
       ],
       check: {
@@ -293,6 +345,7 @@ name: "SignUp",
       password2: "",
       sex: "",
       date: "",
+      sexorient: "",
       interest: "",
       menu: false,
       valid: true,
@@ -300,40 +353,6 @@ name: "SignUp",
       valuePass2: true,
       dialogm1: '',
       dialog: false,
-      rules: {
-        username: () => {
-          if (this.username.length>=3 && this.username.length<=15 && this.username.match(/[a-z]/i)){
-            this.check.userCheck = true
-            return true
-          }else{
-            return false
-          }
-        },
-        mail: value => {
-          const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+[\w-]{1,5}$/i;
-          this.check.mailCheck = pattern.test(value)
-          return pattern.test(value)
-        },
-        password: value => {
-          const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/i;
-          return pattern.test(value)
-        },
-        confirmPassword: value => {
-          if (value === this.password){
-            this.check.passCheck = true
-            return true
-          }else{
-            return false
-          }
-        },
-        name: value => {
-          if (value === ''){
-            return false
-          }else{
-            return true
-          }
-        }
-      }
     }
   }
 }

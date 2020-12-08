@@ -28,7 +28,6 @@
                 :append-icon="valuePass ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="() => (valuePass = !valuePass)"
                 :type="valuePass ? 'password' : 'text'"
-                :rules="[rules.password(currentPassword)]"
             ></v-text-field>
             <v-text-field
                 v-model="newPassword"
@@ -37,7 +36,7 @@
                 :append-icon="valuePass2 ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="() => (valuePass2 = !valuePass2)"
                 :type="valuePass2 ? 'password' : 'text'"
-                :rules="[rules.password(newPassword)]"
+                :rules="[checkpassword(newPassword)]"
             ></v-text-field>
             <v-text-field
                 v-model="newPassword2"
@@ -46,7 +45,7 @@
                 :append-icon="valuePass3 ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="() => (valuePass3 = !valuePass3)"
                 :type="valuePass3 ? 'password' : 'text'"
-                :rules="[rules.password(newPassword2)]"
+                :rules="[checkconfirmPassword(newPassword2)]"
             ></v-text-field>
             <p id="path"></p>
             <v-card-actions>
@@ -104,6 +103,21 @@
 export default {
 name: "ProfileSecurity",
 
+  methods: {
+    checkpassword(value){
+      const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/i;
+      return pattern.test(value)
+    },
+    checkconfirmPassword(value){
+      if (value === this.password){
+        this.check.passCheck = true
+        return true
+      }else{
+        return false
+      }
+    },
+  },
+
   data () {
     return {
       currentPassword: '',
@@ -112,17 +126,6 @@ name: "ProfileSecurity",
       valuePass: true,
       valuePass2: true,
       valuePass3: true,
-      rules: {
-        mail: value => {
-          const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+[\w-]{1,5}$/i;
-          this.check.mailCheck = pattern.test(value)
-          return pattern.test(value)
-        },
-        password: value => {
-          const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/i;
-          return pattern.test(value)
-        },
-      }
     }
   }
 }
