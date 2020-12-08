@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state: {
+        base_api_url: 'https://localhost:4040/api',
     },
 
     mutations: {

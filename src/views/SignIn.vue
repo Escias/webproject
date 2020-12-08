@@ -230,6 +230,7 @@ name: "SignIn",
   methods:{
     prevbtn(){
       if (this.e1 === 1){
+        this.createUser()
         this.$router.push('/')
       }else{
         this.e1--
@@ -238,6 +239,7 @@ name: "SignIn",
     nextbtn(){
       this.display()
       if (this.e1 === 3){
+        this.createUser()
         this.$router.push('/')
       }else if (this.e1 === 1){
         if (this.check.userCheck===true && this.check.mailCheck===true && this.check.passCheck===true){
@@ -254,6 +256,20 @@ name: "SignIn",
     display(){
       console.log(this.interest)
     },
+
+    createUser() {
+      const params = {
+        username: this.username,
+        firstname: this.firstname,
+        lastname: this.lastname,
+        password: this.password,
+        email: this.mail,
+        sexual_orientation: "Straight",
+        gender: this.sex,
+        birthday: this.date,
+      }
+      this.$store.dispatch("userApi/createUser", params)
+    }
   },
 
   watch: {
