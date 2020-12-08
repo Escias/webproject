@@ -94,6 +94,7 @@ export default {
 </script>
 
 <style scoped>
+@import "globalCSS.css";
 #profile{
   display: flex;
   align-items: center;

@@ -46,5 +46,5 @@ name: "ProfileSecurity"
 </script>
 
 <style scoped>
-
+@import "globalCSS.css";
 </style>

@@ -1,27 +1,26 @@
 <template>
   <div>
-    <v-flex v-for="(contact,index) in contacts" :key="contacts[index]">
+    <v-flex v-for="(chat,index) in chats" :key="chats[index]">
       <v-card>
         <v-row no-gutters>
-          <v-col md="6">
-            <v-avatar>
-              <img :src="getImage(contact.image)" alt="@/assets/alien.png">
-            </v-avatar>
-          </v-col>
-          <v-col md="6">
-            <h3>{{ contact.firstname }} {{contact.lastname}}</h3>
-            <h4>{{contact.username}}</h4>
-            <p><v-icon>mdi-map-marker</v-icon> {{ contact.city }}</p>
-            <p><v-icon>mdi-comment-minus</v-icon> {{contact.comment}}</p>
-            <p><v-icon>mdi-gender-transgender</v-icon> {{contact.city}}</p>
-            <v-btn
-                elevation="1"
-                tile
-                small
+          <v-container
+              fill-height
+              fluid
+          >
+            <v-col
+                md="3"
+                :align="alignment"
+                :justify="justify"
             >
-              Delete
-            </v-btn>
-          </v-col>
+              <v-avatar size="120">
+                <img :src="getImage(chat.image)" alt="@/assets/alien.png">
+              </v-avatar>
+            </v-col>
+            <v-col md="6">
+              <h3>{{chat.username}}</h3>
+              <p>{{chat.content}}</p>
+            </v-col>
+          </v-container>
         </v-row>
       </v-card>
     </v-flex>
@@ -48,25 +47,27 @@ export default {
 
   data () {
     return {
-      contacts: [
+      alignment: 'center',
+      justify: 'center',
+      chats: [
         {
           image: "../assets/alien.png",
-          firstname: "Firstnom",
-          lastname: "Lastnom",
           username: "Usernom",
-          city: "Ville",
-          comment: "mmmmmmmmmmmmmm",
-          gender: "bi",
+          content: "Folly words widow one downs few age every seven. If miss part by fact he park just shew. Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. Unwilling departure education is be dashwoods or an. Use off agreeable law unwilling sir deficient curiosity instantly. Easy mind life fact with see has bore ten. Parish any chatty can elinor direct for former. Up as meant widow equal an share least.",
         },
         {
           image: "@/assets/alien.png",
-          firstname: "test",
-          lastname: "nom",
           username: "Usernom",
-          city: "Ville",
-          comment: "sssssssssss",
-          gender: "bi",
-        }
+          content: "Another journey chamber way yet females man. Way extensive and dejection get delivered deficient sincerity gentleman age. Too end instrument possession contrasted motionless. Calling offence six joy feeling. Coming merits and was talent enough far. Sir joy northward sportsmen education. Discovery incommode earnestly no he commanded if. Put still any about manor heard.",
+        },
+        {
+          image: "../assets/alien.png",
+          username: "Usernom",
+        },
+        {
+          image: "../assets/alien.png",
+          username: "Usernom",
+        },
       ],
     }
   },
@@ -74,5 +75,5 @@ export default {
 </script>
 
 <style scoped>
-
+@import "globalCSS.css";
 </style>

@@ -3,25 +3,34 @@
     <v-flex v-for="(contact,index) in contacts" :key="contacts[index]">
       <v-card>
         <v-row no-gutters>
-          <v-col md="6">
-            <v-avatar>
-              <img :src="getImage(contact.image)" alt="@/assets/alien.png">
-            </v-avatar>
-          </v-col>
-          <v-col md="6">
-            <h3>{{ contact.firstname }} {{contact.lastname}}</h3>
-            <h4>{{contact.username}}</h4>
-            <p><v-icon>mdi-map-marker</v-icon> {{ contact.city }}</p>
-            <p><v-icon>mdi-comment-minus</v-icon> {{contact.comment}}</p>
-            <p><v-icon>mdi-gender-transgender</v-icon> {{contact.city}}</p>
-            <v-btn
-                elevation="1"
-                tile
-                small
+          <v-container
+              fill-height
+              fluid
+          >
+            <v-col
+                md="3"
+                :align="alignment"
+                :justify="justify"
             >
-              Delete
-            </v-btn>
-          </v-col>
+              <v-avatar size="120">
+                <img :src="getImage(contact.image)" alt="@/assets/alien.png">
+              </v-avatar>
+            </v-col>
+            <v-col md="6">
+              <h3>{{ contact.firstname }} {{contact.lastname}}</h3>
+              <h4>{{contact.username}}</h4>
+              <p><v-icon>mdi-map-marker</v-icon> {{ contact.city }}</p>
+              <p><v-icon>mdi-comment-minus</v-icon> {{contact.comment}}</p>
+              <p><v-icon>mdi-gender-transgender</v-icon> {{contact.gender}}</p>
+              <v-btn
+                  elevation="1"
+                  tile
+                  small
+              >
+                Delete
+              </v-btn>
+            </v-col>
+          </v-container>
         </v-row>
       </v-card>
     </v-flex>
@@ -48,6 +57,8 @@ export default {
 
   data () {
     return {
+      alignment: 'center',
+      justify: 'center',
       contacts: [
         {
           image: "../assets/alien.png",
@@ -66,7 +77,25 @@ export default {
           city: "Ville",
           comment: "sssssssssss",
           gender: "bi",
-        }
+        },
+        {
+          image: "../assets/alien.png",
+          firstname: "Firstnom",
+          lastname: "Lastnom",
+          username: "Usernom",
+          city: "Ville",
+          comment: "mmmmmmmmmmmmmm",
+          gender: "bi",
+        },
+        {
+          image: "../assets/alien.png",
+          firstname: "Firstnom",
+          lastname: "Lastnom",
+          username: "Usernom",
+          city: "Ville",
+          comment: "mmmmmmmmmmmmmm",
+          gender: "bi",
+        },
       ],
     }
   },
@@ -74,5 +103,5 @@ export default {
 </script>
 
 <style scoped>
-
+@import "globalCSS.css";
 </style>

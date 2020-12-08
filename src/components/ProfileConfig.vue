@@ -8,7 +8,7 @@
       <v-card
           elevation="3"
           shaped
-          height="135%"
+          height="790px"
       >
         <v-container
             fill-height
@@ -47,7 +47,8 @@
       <v-card
           elevation="3"
           shaped
-          height="135%"
+          height="790px"
+          class="scroll"
       >
         <div :is="currentComponent"></div>
       </v-card>
@@ -89,6 +90,7 @@ export default {
 </script>
 
 <style scoped>
+@import "globalCSS.css";
 .profile{
   margin: 1%;
 }
@@ -104,5 +106,8 @@ export default {
 }
 .menu{
   font-size: 150%;
+}
+.scroll {
+  overflow-y: scroll
 }
 </style>
