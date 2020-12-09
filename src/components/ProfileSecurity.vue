@@ -100,14 +100,13 @@
 </template>
 
 <script>
+import {checkPassword} from "@/function/loginFunction";
+
 export default {
 name: "ProfileSecurity",
 
   methods: {
-    checkpassword(value){
-      const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/i;
-      return pattern.test(value)
-    },
+    checkpassword:checkPassword,
     checkconfirmPassword(value){
       if (value === this.password){
         this.check.passCheck = true

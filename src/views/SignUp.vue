@@ -31,13 +31,13 @@
               v-model="username"
               label="Enter Username"
               hint="Min. 3 characters. Max. 15 characters. Special character not allowed"
-              :rules="[checkusername()]"
+              :rules="[checkUsername(check)]"
           ></v-text-field>
           <v-text-field
               v-model="mail"
               label="Enter Email Address"
               hint="Enter a valid email address"
-              :rules="[checkmail(mail)]"
+              :rules="[checkMail(mail,check)]"
           ></v-text-field>
           <v-text-field
               v-model="password"
@@ -46,7 +46,7 @@
               :append-icon="valuePass ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="() => (valuePass = !valuePass)"
               :type="valuePass ? 'password' : 'text'"
-              :rules="[checkpassword(password)]"
+              :rules="[checkPassword(password)]"
           ></v-text-field>
           <v-text-field
               v-model="password2"
@@ -55,7 +55,7 @@
               :append-icon="valuePass2 ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="() => (valuePass2 = !valuePass2)"
               :type="valuePass2 ? 'password' : 'text'"
-              :rules="[checkconfirmPassword(password2)]"
+              :rules="[confirmPassword(password2,check)]"
           ></v-text-field>
         </v-flex>
       </v-stepper-content>
@@ -116,12 +116,12 @@
           <v-text-field
               label="Firstname"
               v-model="firstname"
-              :rules="[checkname]"
+              :rules="[checkName]"
           ></v-text-field>
           <v-text-field
               label="Lastname"
               v-model="lastname"
-              :rules="[checkname]"
+              :rules="[checkName]"
           ></v-text-field>
           <p>Sex</p>
           <v-radio-group
@@ -171,7 +171,7 @@
                 :max="new Date().toISOString().substr(0,10)"
                 min="1900-01-01"
                 @input="menu = false"
-                :rules="[checkname(date)]"
+                :rules="[checkName(date)]"
             ></v-date-picker>
           </v-menu>
           <!--<v-date-picker v-model="picker"></v-date-picker>-->
@@ -231,6 +231,7 @@
 <script>
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import {checkPassword,checkName,confirmPassword,checkUsername,checkMail} from "@/function/loginFunction";
 
 export default {
 name: "SignUp",
@@ -239,6 +240,11 @@ name: "SignUp",
   },
 
   methods:{
+    checkPassword:checkPassword,
+    checkName:checkName,
+    confirmPassword:confirmPassword,
+    checkUsername:checkUsername,
+    checkMail:checkMail,
     prevbtn(){
       if (this.e1 === 1){
         this.$router.push('/')
@@ -259,38 +265,6 @@ name: "SignUp",
         if (this.firstname.length!==0 && this.lastname.length!==0 && this.sex!==''){
           this.e1++
         }
-      }
-    },
-    checkusername(){
-      if (this.username.length>=3 && this.username.length<=15 && this.username.match(/[a-z]/i)){
-        this.check.userCheck = true
-        return true
-      }else{
-        return false
-      }
-    },
-    checkmail(value){
-      const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+[\w-]{1,5}$/i;
-      this.check.mailCheck = pattern.test(value)
-      return pattern.test(value)
-    },
-    checkpassword(value){
-      const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/i;
-      return pattern.test(value)
-    },
-    checkconfirmPassword(value){
-      if (value === this.password){
-        this.check.passCheck = true
-        return true
-      }else{
-        return false
-      }
-    },
-    checkname(value){
-      if (value === ''){
-        return false
-      }else{
-        return true
       }
     },
   },
