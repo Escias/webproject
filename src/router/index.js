@@ -30,7 +30,12 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: () => import(/* webpackChunkName: "about" */ '../views/Profile')
-  }
+  },
+  {
+    path: '/finder',
+    name: 'Finder',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Finder')
+  },
 ]
 
 const router = new VueRouter({

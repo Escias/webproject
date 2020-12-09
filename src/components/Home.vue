@@ -51,7 +51,6 @@
         </v-col>
       </v-container>
     </div>
-    <Footer style="z-index: 98" id="footer"/>
   </div>
 </template>
 

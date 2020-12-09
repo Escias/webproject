@@ -24,8 +24,6 @@
               <br/>
               <v-btn x-large class="menu" text @click="swapComponent('info')">Profile</v-btn>
               <br/>
-              <v-btn x-large class="menu" text @click="swapComponent('post')">Post</v-btn>
-              <br/>
               <v-btn x-large class="menu" text @click="swapComponent('contact')">Contact</v-btn>
               <br/>
               <v-btn x-large class="menu" text @click="swapComponent('chat')">Chat</v-btn>
@@ -58,7 +56,6 @@
 
 <script>
 import ProfileInfo from "@/components/ProfileInfo";
-import ProfilePost from "@/components/ProfilePost";
 import ProfileContact from "@/components/ProfileContact";
 import ProfileChat from "@/components/ProfileChat";
 import ProfileSecurity from "@/components/ProfileSecurity";
@@ -68,7 +65,6 @@ export default {
 
   components: {
     info: ProfileInfo,
-    post: ProfilePost,
     contact: ProfileContact,
     chat: ProfileChat,
     security: ProfileSecurity,
