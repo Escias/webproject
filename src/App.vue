@@ -15,7 +15,29 @@ export default {
   components: {
     Header,
     Footer
+  },
+
+  mounted: function () {
+    this.$store.commit('userApi/reloadStorage')
+  },
+
+  updated: function () {
+    this.$store.commit('userApi/reloadStorage')
+  },
+
+  created: function () {
+    this.$http.interceptors.response.use(undefined, function (err) {
+      // eslint-disable-next-line no-unused-vars
+      return new Promise(function (resolve, reject) {
+        if (err.status === 401) {
+          this.$store.dispatch('logout')
+          return this.$router.push('/login')
+        }
+        throw err;
+      });
+    });
   }
+
 }
 </script>
 
