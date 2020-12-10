@@ -39,19 +39,11 @@
             active-class="deep-purple--text text--accent-4"
         >
           <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
+            <v-list-item-title @click="changePage('profile')">Profile</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
+            <v-list-item-title @click="changePage('chat')">Chat</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -72,6 +64,9 @@ export default {
     },
     signup(){
       this.$router.push('/signup')
+    },
+    changePage(page){
+      this.$router.push('/'+page)
     },
   },
 

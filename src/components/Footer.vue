@@ -14,8 +14,9 @@
           text
           rounded
           class="my-2"
+          @click="swapPage(link.page)"
       >
-        {{ link }}
+        {{ link.link }}
       </v-btn>
       <v-col
           class="grey darken-4 py-4 text-center white--text"
@@ -32,15 +33,18 @@
 export default {
   name: "Footer",
 
+  methods: {
+    swapPage(page){
+      this.$router.push('/'+page)
+    },
+  },
+
   data: () => ({
     links: [
-      'Home',
-      'About Us',
-      'Team',
-      'Services',
-      'Forum',
-      'Contact Us',
-    ],
+      {link: 'Home', page: ''},
+      {link: 'Forum', page: ''},
+      {link: 'Chat', page: 'chat'},
+    ]
   }),
 }
 </script>
