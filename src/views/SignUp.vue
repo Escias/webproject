@@ -269,7 +269,7 @@ name: "SignUp",
         lastname: this.lastname,
         password: this.password,
         email: this.mail,
-        sexual_orientation: "Straight",
+        sexual_orientation: this.sexorient,
         gender: this.sex,
         birthday: this.date,
       }

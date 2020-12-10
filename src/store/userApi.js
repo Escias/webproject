@@ -82,8 +82,8 @@ export default ({
             })
         },
 
-        getListOtherUsers({state, commit}) {
-            const params = {_id: state.user._id}
+        getListOtherUsers({state, commit},filters={sexual_orientation:[],conspiracies:[],genders:[]}) {
+            const params = {_id: state.user._id,filters:filters}
             axios.post('users', params)
                 .then(response => {
                     commit('setList', response.data.users)
