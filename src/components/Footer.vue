@@ -8,8 +8,8 @@
         no-gutters
     >
       <v-btn
-          v-for="link in links"
-          :key="link"
+          v-for="(link,index) in links"
+          v-bind:key="index"
           color="white"
           text
           rounded
