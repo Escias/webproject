@@ -248,6 +248,7 @@ name: "SignUp",
     },
     nextbtn(){
       if (this.e1 === 3){
+        this.register()
         this.$router.push('/')
       }else if (this.e1 === 1){
         if (this.check.userCheck===true && this.check.mailCheck===true && this.check.passCheck===true){
@@ -260,6 +261,20 @@ name: "SignUp",
           this.e1++
         }
       }
+    },
+    register() {
+      const params = {
+        username: this.username,
+        firstname: this.firstname,
+        lastname: this.lastname,
+        password: this.password,
+        email: this.mail,
+        sexual_orientation: "Straight",
+        gender: this.sex,
+        birthday: this.date,
+      }
+      console.log(params)
+      this.$store.dispatch("userApi/register", params)
     },
     checkusername(){
       if (this.username.length>=3 && this.username.length<=15 && this.username.match(/[a-z]/i)){
@@ -287,11 +302,7 @@ name: "SignUp",
       }
     },
     checkname(value){
-      if (value === ''){
-        return false
-      }else{
-        return true
-      }
+      return value !== '';
     },
   },
 

@@ -27,6 +27,7 @@
                   :type="valuePass ? 'password' : 'text'"
               ></v-text-field>
               <v-btn
+                  @click="connect"
                   rounded
                   color="primary"
               >Connect</v-btn>
@@ -64,46 +65,13 @@ export default {
   name: "SignIn",
 
   methods:{
-    prevbtn(){
-      if (this.e1 === 1){
-        this.createUser()
-        this.$router.push('/')
-      }else{
-        this.e1--
-      }
-    },
-    nextbtn()
-    {
-      this.display()
-      if (this.e1 === 3) {
-        this.createUser()
-        this.$router.push('/')
-      } else if (this.e1 === 1) {
-        if (this.check.userCheck === true && this.check.mailCheck === true && this.check.passCheck === true) {
-          this.e1++
-        } else {
-          document.getElementById('E1').innerHTML = "Complete all fields"
+      connect () {
+        const params = {
+          email: this.mail,
+          password: this.password
         }
-      } else if (this.e1 === 2) {
-        if (this.firstname.length !== 0 && this.lastname.length !== 0 && this.sex !== '') {
-          this.e1++
-        }
+        this.$store.dispatch("userApi/login", params)
       }
-    },
-
-    createUser() {
-      const params = {
-        username: this.username,
-        firstname: this.firstname,
-        lastname: this.lastname,
-        password: this.password,
-        email: this.mail,
-        sexual_orientation: "Straight",
-        gender: this.sex,
-        birthday: this.date,
-      }
-      this.$store.dispatch("userApi/createUser", params)
-    }
   },
 
   data () {

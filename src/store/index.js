@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
 import userApi from './userApi'
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 
     state: {
-        base_api_url: 'https://localhost:4040/api',
     },
 
     mutations: {
@@ -18,6 +18,7 @@ export default new Vuex.Store({
 
     modules: {
         userApi: userApi
-    }
+    },
+    plugins: [createPersistedState()]
 
 })
