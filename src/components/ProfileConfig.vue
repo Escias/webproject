@@ -8,7 +8,7 @@
       <v-card
           elevation="3"
           shaped
-          height="790px"
+          height="80vh"
       >
         <v-container
             fill-height
@@ -45,7 +45,7 @@
       <v-card
           elevation="3"
           shaped
-          height="790px"
+          height="80vh"
           class="scroll"
       >
         <div :is="currentComponent"></div>

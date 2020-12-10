@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Homepage from "@/views/Homepage.vue";
+import store from "@/store/userApi.js";
 
 Vue.use(VueRouter)
 
@@ -29,22 +30,43 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Profile')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Profile'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/finder',
     name: 'Finder',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Finder')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Finder'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/chat',
     name: 'ChatPage',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ChatPage')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ChatPage'),
+    meta: {
+      requiresAuth: true
+    }
   },
 ]
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/')
+  } else {
+    next()
+  }
 })
 
 export default router

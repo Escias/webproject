@@ -14,6 +14,13 @@
              elevation="1"
              rounded
              color="primary"
+             @click="finder"
+      >Meet hot complotists in your area</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn v-if="isAuth"
+             elevation="1"
+             rounded
+             color="primary"
              @click="logout"
       >Logout</v-btn>
       <div v-else>
@@ -82,6 +89,9 @@ export default {
   methods: {
     home(){
       this.$router.push('/')
+    },
+    finder(){
+      this.$router.push('/finder')
     },
     signin(){
       this.$router.push('/signin')
