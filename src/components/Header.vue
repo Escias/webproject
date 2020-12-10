@@ -10,18 +10,26 @@
       <img src="@/assets/didier.png" alt="" class="logo">
       <v-btn text @click="home"><v-toolbar-title>NOMeetic</v-toolbar-title></v-btn>
       <v-spacer></v-spacer>
-      <v-btn
-          elevation="1"
-          rounded
-          color="primary"
-          @click="signin"
-      >Sign-In</v-btn>
-      <v-btn
-          elevation="1"
-          rounded
-          color="primary"
-          @click="signup"
-      >Sign-Up</v-btn>
+      <v-btn v-if="isAuth"
+             elevation="1"
+             rounded
+             color="primary"
+             @click="logout"
+      >Logout</v-btn>
+      <div v-else>
+        <v-btn
+            elevation="1"
+            rounded
+            color="primary"
+            @click="signin"
+        >Sign-In</v-btn>
+        <v-btn
+            elevation="1"
+            rounded
+            color="primary"
+            @click="signup"
+        >Sign-Up</v-btn>
+      </div>
     </v-app-bar>
     <v-navigation-drawer
         v-model="drawer"
@@ -60,8 +68,16 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "Header",
+
+  computed: {
+    ...mapGetters({
+      'isAuth': 'userApi/isLoggedIn'
+    })
+  },
 
   methods: {
     home(){
@@ -72,6 +88,10 @@ export default {
     },
     signup(){
       this.$router.push('/signup')
+    },
+    logout () {
+      this.$store.dispatch('userApi/logout')
+      this.$forceUpdate();
     },
   },
 
@@ -84,7 +104,7 @@ export default {
   watch: {
     group(){
       this.drawer = false
-    }
+    },
   }
 }
 </script>

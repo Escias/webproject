@@ -71,6 +71,7 @@ export default {
           password: this.password
         }
         this.$store.dispatch("userApi/login", params)
+        this.$router.push('/')
       }
   },
 

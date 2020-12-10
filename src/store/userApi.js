@@ -5,9 +5,10 @@ export default ({
 
     state: {
         status: '',
-        token: localStorage.getItem('token') || '',
+        token: localStorage.getItem('token') || 'toto',
         user : {}
     },
+
 
     mutations: {
         auth_request(state){
@@ -25,6 +26,9 @@ export default ({
             state.status = ''
             state.token = ''
         },
+        reloadStorage(state) {
+            state.token = localStorage.getItem('token') || '';
+        }
     },
 
     actions: {
