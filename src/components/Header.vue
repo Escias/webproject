@@ -54,7 +54,7 @@
             active-class="deep-purple--text text--accent-4"
         >
           <v-list-item>
-            <v-list-item-title @click="changePage('profile')">Profile</v-list-item-title>
+            <v-list-item-title @click="changePage('info')">Profile</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -95,8 +95,9 @@ export default {
       this.$store.dispatch('userApi/logout')
       this.$router.push('/')
     },
-    changePage(page){
-      this.$router.push('/'+page)
+    changePage: function (page) {
+      this.$store.commit('setCurrentProfilePage', page)
+      this.$router.push('/profile')
     },
   },
 

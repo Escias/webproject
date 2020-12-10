@@ -59,6 +59,7 @@ import ProfileInfo from "@/components/ProfileInfo";
 import ProfileContact from "@/components/ProfileContact";
 import ProfileChat from "@/components/ProfileChat";
 import ProfileSecurity from "@/components/ProfileSecurity";
+import {mapState} from "vuex";
 
 export default {
   name: "ProfileConfig",
@@ -72,14 +73,19 @@ export default {
 
   methods: {
     swapComponent(component){
-      this.currentComponent = component
+      this.$store.commit('setCurrentProfilePage', component)
     },
+  },
+
+  computed: {
+    ...mapState({
+      'currentComponent': 'currentProfilePage'
+    })
   },
 
   data () {
     return {
       alignment: 'center',
-      currentComponent: "info",
     }
   },
 }

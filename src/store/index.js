@@ -8,9 +8,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state: {
+        currentProfilePage: '',
     },
 
     mutations: {
+        setCurrentProfilePage(state, page) {
+            state.currentProfilePage = page
+        }
     },
 
     actions: {
