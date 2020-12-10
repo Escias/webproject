@@ -45,8 +45,8 @@
       <v-card
           elevation="3"
           shaped
-          height="80vh"
           class="scroll"
+          height="80vh"
       >
         <div :is="currentComponent"></div>
       </v-card>

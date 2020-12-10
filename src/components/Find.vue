@@ -4,7 +4,7 @@
       <v-card
           elevation="3"
           shaped
-          height="790px"
+          height="80vh"
           class="scroll"
       >
         <v-flex v-for="(user,index) in users" :key="users[index]">
@@ -28,7 +28,8 @@
                   <h4>{{user.username}}</h4>
                   <p><v-icon>mdi-map-marker</v-icon> {{ user.city }}</p>
                   <p><v-icon>mdi-comment-minus</v-icon> {{user.comment}}</p>
-                  <p><v-icon>mdi-gender-transgender</v-icon> {{user.gender}}</p>
+                  <p><v-icon>mdi-gender-male-female</v-icon> Gender : {{user.gender}}</p>
+                  <p><v-icon>mdi-gender-transgender</v-icon> Sexual orientation : {{user.orientation}}</p>
                   <v-btn
                       elevation="1"
                       tile
@@ -72,6 +73,7 @@ name: "Find",
           city: "Ville",
           comment: "mmmmmmmmmmmmmm",
           gender: "bi",
+          orientation: 'hetero',
         },
         {
           image: "@/assets/alien.png",
@@ -81,6 +83,7 @@ name: "Find",
           city: "Ville",
           comment: "sssssssssss",
           gender: "bi",
+          orientation: 'hetero',
         },
         {
           image: "../assets/alien.png",
@@ -90,6 +93,7 @@ name: "Find",
           city: "Ville",
           comment: "mmmmmmmmmmmmmm",
           gender: "bi",
+          orientation: 'hetero',
         },
         {
           image: "../assets/alien.png",
@@ -99,6 +103,7 @@ name: "Find",
           city: "Ville",
           comment: "mmmmmmmmmmmmmm",
           gender: "bi",
+          orientation: 'hetero',
         },
       ],
     }
