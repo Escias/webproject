@@ -107,10 +107,8 @@ name: "Find",
 </script>
 
 <style scoped>
+@import "globalCSS.css";
 .profile{
   margin: 1%;
-}
-.scroll {
-  overflow-y: scroll
 }
 </style>
