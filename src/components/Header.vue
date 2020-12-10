@@ -93,7 +93,7 @@ export default {
     },
     logout () {
       this.$store.dispatch('userApi/logout')
-      this.$forceUpdate();
+      this.$router.push('/')
     },
     changePage(page){
       this.$router.push('/'+page)

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Homepage from "@/views/Homepage.vue";
-import store from "@/store/userApi.js";
 
 Vue.use(VueRouter)
 
@@ -59,7 +58,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
+    if (localStorage.getItem("token")) {
       next()
       return
     }
