@@ -9,44 +9,42 @@
             :align="alignment"
             :justify="justify"
         >
-          <div  id="Text">
+          <div id="main">
             <h1>ComploMeet</h1>
             <br/>
-            Hello and Welcome to the new meet experience, have you ever wondered
+            <p>Hello and Welcome to the new meet experience, have you ever wondered
             <br/>
             “how can I find a person who is aware of all the lie that the world government is delivering to us?”.
             <br/>
             Here you are, this is the place where you can find a person who really matches you.
             <br/>
-            Go on and register 😊.
+              Go on and register 😊.</p>
           </div>
           <br/>
-          <p id="presentation">Retrouvez des profils utilisateur :) </p>
+          <v-card
+              width="35vh"
+              color="#000000"
+          >
+            <p style="color: white">Retrouvez des profils utilisateur :) </p>
+          </v-card>
           <div id="person">
-            <div class="card">
-              <img class="photo" src="../assets/MichelDrucker.jpg" >
-              <p>Michel</p>
-              <br/>
-              <p>54 ans</p>
-              <br/>
-              <p>Platiste</p>
-            </div>
-            <div class="card" >
-              <img class="photo" src="../assets/MichelDrucker.jpg" >
-              <p>Michel</p>
-              <br/>
-              <p>54 ans</p>
-              <br/>
-              <p>Platiste</p>
-            </div>
-            <div class="card" >
-              <img class="photo" src="../assets/MichelDrucker.jpg">
-              <p>Michel</p>
-              <br/>
-              <p>54 ans</p>
-              <br/>
-              <p>Platiste</p>
-            </div>
+            <v-flex v-for="(fake,index) in fakes" :key="fakes[index]">
+                <v-card
+                    elevation="10"
+                    width="20vh"
+                    color="#26c6da"
+                    shaped
+                >
+                  <v-avatar>
+                    <img :src="getImage(fake.image)" alt="@/assets/alien.png">
+                  </v-avatar>
+                  <h3>{{ fake.firstname }} {{fake.lastname}}</h3>
+                  <h4>{{fake.username}}</h4>
+                  <p><v-icon>mdi-map-marker</v-icon> {{ fake.city }}</p>
+                  <p><v-icon>mdi-gender-male-female</v-icon> Gender : {{fake.gender}}</p>
+                  <p><v-icon>mdi-gender-transgender</v-icon> Sexual orientation : {{fake.orientation}}</p>
+                </v-card>
+            </v-flex>
           </div>
         </v-col>
       </v-container>
@@ -58,12 +56,51 @@
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
   name: "Home",
+
+  methods: {
+    getImage(url) {
+      if (url !== '' && url.startsWith('http')) {
+        return url;
+      }
+      return require(`@/assets/alien.png`)
+    }
+  },
+
   components: {
   },
   data () {
     return {
       alignment: 'center',
-      justify: 'center'
+      justify: 'center',
+      fakes: [
+        {
+          image: "../assets/alien.png",
+          firstname: "Firstnom",
+          lastname: "Lastnom",
+          username: "Usernom",
+          city: "Ville",
+          gender: "bi",
+          orientation: 'hetero',
+        },
+        {
+          image: "@/assets/alien.png",
+          firstname: "test",
+          lastname: "nom",
+          username: "Usernom",
+          city: "Ville",
+          gender: "bi",
+          orientation: 'hetero',
+        },
+        {
+          image: "@/assets/alien.png",
+          firstname: "test",
+          lastname: "nom",
+          username: "Usernom",
+          city: "Ville",
+          gender: "bi",
+          orientation: 'hetero',
+        },
+      ]
     }
   },
 }
@@ -81,26 +118,18 @@ export default {
   transform: scale(1.1);
   z-index: 0;
 }
-#Text {
-  background-color: coral;
-}
-#presentation{
-  background-color: #314b5f;
-}
 #person{
-  width: 25%;
+  width: 50%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-content: center;
   z-index: 5;
 }
-.photo {
-  z-index: 5;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-.card{
-  background-color: #00b782;
-  width: 30%;
+#main{
+  border-color: #9ecaed;
+  border-radius: 35%;
+  box-shadow: 0px 0px 25px 25px #fdff00;
+  width: 80vh;
+  background-color: #fdff00;
 }
 </style>

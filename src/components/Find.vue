@@ -1,6 +1,5 @@
 <template>
   <v-row no-gutters class="profile">
-    <v-btn @click="log">DEBUG</v-btn>
     <v-col>
       <v-card
           elevation="3"
@@ -62,9 +61,6 @@ export default {
       }
       return require(`@/assets/alien.png`)
     },
-    log() {
-      console.log(this.users)
-    }
   },
 
   computed: {

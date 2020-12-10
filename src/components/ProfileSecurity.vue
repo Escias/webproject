@@ -20,6 +20,7 @@
           <v-btn
               elevation="2"
               color="primary"
+              @click="validMail"
           >Validate</v-btn>
         </div>
       </v-col>
@@ -42,6 +43,7 @@
           <v-btn
               elevation="2"
               color="primary"
+              @click="validPhone"
           >Validate</v-btn>
         </div>
       </v-col>
@@ -86,6 +88,7 @@
           <v-btn
               elevation="2"
               color="primary"
+              @click="validPassword"
           >Validate</v-btn>
         </div>
       </v-col>
@@ -96,7 +99,7 @@
         <p>Delete all your data (does not delete chat exchanges)</p>
       </v-col>
       <v-col>
-        <v-btn rounded color="error">Delete</v-btn>
+        <v-btn rounded color="error" @click="deleteAccount">Delete</v-btn>
       </v-col>
     </v-card>
   </div>
@@ -107,6 +110,29 @@ export default {
 name: "ProfileSecurity",
 
   methods: {
+    deleteAccount(){
+      return true
+    },
+    validMail(){
+      if (this.check.mailCheck === true){
+        this.swaphidden('M1')
+        return true
+      }else{
+        return false
+      }
+    },
+    validPhone(){
+      this.swaphidden('M2')
+      return true
+    },
+    validPassword(){
+      if (this.check.passCheck === true){
+        this.swaphidden('M3')
+        return true
+      }else{
+        return false
+      }
+    },
     checkpassword(value){
       const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/i;
       return pattern.test(value)
@@ -116,6 +142,7 @@ name: "ProfileSecurity",
         this.check.passCheck = true
         return true
       }else{
+        this.check.passCheck = false
         return false
       }
     },
@@ -161,6 +188,8 @@ name: "ProfileSecurity",
       phone: '',
       mail: '',
       check: {
+        passCheck: false,
+        mailCheck: false,
         valuePass: true,
         valuePass2: true,
         valuePass3: true,

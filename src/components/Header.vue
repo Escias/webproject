@@ -8,7 +8,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <img src="@/assets/didier.png" alt="" class="logo">
-      <v-btn text @click="home"><v-toolbar-title>NOMeetic</v-toolbar-title></v-btn>
+      <v-btn text @click="home"><v-toolbar-title>ComploMeet</v-toolbar-title></v-btn>
       <v-spacer></v-spacer>
       <v-btn v-if="isAuth"
              elevation="1"
@@ -93,7 +93,7 @@ export default {
     },
     logout () {
       this.$store.dispatch('userApi/logout')
-      this.$forceUpdate();
+      this.$router.push('/')
     },
     changePage(page){
       this.$router.push('/'+page)
