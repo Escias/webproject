@@ -1,5 +1,6 @@
 <template>
   <v-row no-gutters class="profile">
+    <v-btn @click="log">DEBUG</v-btn>
     <v-col>
       <v-card
           elevation="3"
@@ -20,16 +21,17 @@
                     :justify="justify"
                 >
                   <v-avatar size="120">
-                    <img :src="getImage(user.image)" alt="@/assets/alien.png">
+                    <!--<img :src="getImage(user.image)" alt="@/assets/alien.png">-->
+                    <img src="@/assets/alien.png" alt="Alien">
                   </v-avatar>
                 </v-col>
                 <v-col md="6">
                   <h3>{{ user.firstname }} {{user.lastname}}</h3>
                   <h4>{{user.username}}</h4>
-                  <p><v-icon>mdi-map-marker</v-icon> {{ user.city }}</p>
-                  <p><v-icon>mdi-comment-minus</v-icon> {{user.comment}}</p>
+                  <!--<p><v-icon>mdi-map-marker</v-icon> {{ user.city }}</p>-->
+                  <p><v-icon>mdi-comment-minus</v-icon> {{user.description}}</p>
                   <p><v-icon>mdi-gender-male-female</v-icon> Gender : {{user.gender}}</p>
-                  <p><v-icon>mdi-gender-transgender</v-icon> Sexual orientation : {{user.orientation}}</p>
+                  <p><v-icon>mdi-gender-transgender</v-icon> Sexual orientation : {{user.sexual_orientation}}</p>
                   <v-btn
                       elevation="1"
                       tile
@@ -48,64 +50,33 @@
 </template>
 
 <script>
-export default {
-name: "Find",
+import {mapGetters} from "vuex";
 
+export default {
+  name: "Find",
+  
   methods: {
     getImage(url) {
       if (url !== '' && url.startsWith('http')) {
         return url;
       }
       return require(`@/assets/alien.png`)
+    },
+    log() {
+      console.log(this.users)
     }
+  },
+
+  computed: {
+    ...mapGetters({
+      'users': 'userApi/getList'
+    })
   },
 
   data () {
     return {
       alignment: 'center',
       justify: 'center',
-      users: [
-        {
-          image: "../assets/alien.png",
-          firstname: "Firstnom",
-          lastname: "Lastnom",
-          username: "Usernom",
-          city: "Ville",
-          comment: "mmmmmmmmmmmmmm",
-          gender: "bi",
-          orientation: 'hetero',
-        },
-        {
-          image: "@/assets/alien.png",
-          firstname: "test",
-          lastname: "nom",
-          username: "Usernom",
-          city: "Ville",
-          comment: "sssssssssss",
-          gender: "bi",
-          orientation: 'hetero',
-        },
-        {
-          image: "../assets/alien.png",
-          firstname: "Firstnom",
-          lastname: "Lastnom",
-          username: "Usernom",
-          city: "Ville",
-          comment: "mmmmmmmmmmmmmm",
-          gender: "bi",
-          orientation: 'hetero',
-        },
-        {
-          image: "../assets/alien.png",
-          firstname: "Firstnom",
-          lastname: "Lastnom",
-          username: "Usernom",
-          city: "Ville",
-          comment: "mmmmmmmmmmmmmm",
-          gender: "bi",
-          orientation: 'hetero',
-        },
-      ],
     }
   }
 }
