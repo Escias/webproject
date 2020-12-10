@@ -21,7 +21,8 @@
               <h4>{{contact.username}}</h4>
               <p><v-icon>mdi-map-marker</v-icon> {{ contact.city }}</p>
               <p><v-icon>mdi-comment-minus</v-icon> {{contact.comment}}</p>
-              <p><v-icon>mdi-gender-transgender</v-icon> {{contact.gender}}</p>
+              <p><v-icon>mdi-gender-male-female</v-icon> Gender : {{contact.gender}}</p>
+              <p><v-icon>mdi-gender-transgender</v-icon> Sexual orientation : {{contact.orientation}}</p>
               <v-btn
                   elevation="1"
                   tile
@@ -68,6 +69,7 @@ export default {
           city: "Ville",
           comment: "mmmmmmmmmmmmmm",
           gender: "bi",
+          orientation: 'hetero',
         },
         {
           image: "@/assets/alien.png",
@@ -77,6 +79,7 @@ export default {
           city: "Ville",
           comment: "sssssssssss",
           gender: "bi",
+          orientation: 'hetero',
         },
         {
           image: "../assets/alien.png",
@@ -86,6 +89,7 @@ export default {
           city: "Ville",
           comment: "mmmmmmmmmmmmmm",
           gender: "bi",
+          orientation: 'hetero',
         },
         {
           image: "../assets/alien.png",
@@ -95,6 +99,7 @@ export default {
           city: "Ville",
           comment: "mmmmmmmmmmmmmm",
           gender: "bi",
+          orientation: 'hetero',
         },
       ],
     }

@@ -4,7 +4,7 @@
       <v-card
           elevation="3"
           shaped
-          height="700px"
+          height="70vh"
           class="scroll"
       >
         <v-col>

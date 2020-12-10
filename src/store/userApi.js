@@ -6,7 +6,8 @@ export default ({
     state: {
         status: '',
         token: localStorage.getItem('token') || 'toto',
-        user : {}
+        user : null,
+        listUser: []
     },
 
 
@@ -14,7 +15,7 @@ export default ({
         auth_request(state){
             state.status = 'loading'
         },
-        auth_success(state, token, user){
+        auth_success(state, {token, user}){
             state.status = 'success'
             state.token = token
             state.user = user
@@ -26,8 +27,8 @@ export default ({
             state.status = ''
             state.token = ''
         },
-        reloadStorage(state) {
-            state.token = localStorage.getItem('token') || '';
+        setList(state, list) {
+            state.listUser = list
         }
     },
 
@@ -41,7 +42,7 @@ export default ({
                         const user = resp.data.user
                         localStorage.setItem('token', token)
                         axios.defaults.headers.common['Authorization'] = token
-                        commit('auth_success', token, user)
+                        commit('auth_success', {token, user})
                         resolve(resp)
                     })
                     .catch(err => {
@@ -60,7 +61,7 @@ export default ({
                         const user = response.data.user
                         localStorage.setItem('token', token);
                         axios.defaults.headers.common['Authorization'] = token
-                        commit('auth_success', token, user);
+                        commit('auth_success', {token, user});
                         resolve(response);
                     })
                     .catch(err => {
@@ -79,12 +80,25 @@ export default ({
                 delete axios.defaults.headers.common['Authorization']
                 resolve()
             })
+        },
+
+        getListOtherUsers({state, commit}) {
+            const params = {_id: state.user._id}
+            axios.post('users', params)
+                .then(response => {
+                    commit('setList', response.data.users)
+                })
+                // eslint-disable-next-line no-unused-vars
+                .catch(err => {
+
+                });
         }
     },
 
     getters : {
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
+        getList: state => state.listUser
     }
 
 })
