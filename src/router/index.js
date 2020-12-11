@@ -43,7 +43,7 @@ const routes = [
     }
   },
   {
-    path: '/chat',
+    path: '/chat/:conversation_id',
     name: 'ChatPage',
     component: () => import(/* webpackChunkName: "about" */ '../views/ChatPage'),
     meta: {

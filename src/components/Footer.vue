@@ -43,7 +43,6 @@ export default {
     links: [
       {link: 'Home', page: ''},
       {link: 'Forum', page: ''},
-      {link: 'Chat', page: 'chat'},
     ]
   }),
 }

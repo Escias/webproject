@@ -96,6 +96,7 @@ export default ({
     },
 
     getters : {
+        getCurrUserId: state => state.user._id,
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
         getList: state => state.listUser

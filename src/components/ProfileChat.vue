@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-btn @click="debug">DEBUG</v-btn>
     <v-flex v-for="(chat,index) in chats" :key="chats[index]">
       <v-card>
         <v-row no-gutters>
@@ -21,6 +20,7 @@
               <h3>{{chat.oppositeUser.username}}</h3>
 <!--              <p>{{chat.content}}</p>-->
             </v-col>
+            <v-btn @click="goOnChatPage(chat._id, chat.oppositeUser._id)">Chat</v-btn>
           </v-container>
         </v-row>
       </v-card>
@@ -42,9 +42,9 @@ export default {
       }
       return require(`@/assets/alien.png`)
     },
-    debug() {
-      console.log(this.chats)
-      console.log(this.$store.state.conversationsList)
+    // eslint-disable-next-line no-unused-vars
+    goOnChatPage(idConvo, idOppUser) {
+      this.$router.push({name: 'ChatPage', params: { conversation_id: idConvo }})
     }
   },
 
