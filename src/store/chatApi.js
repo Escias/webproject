@@ -6,6 +6,7 @@ export default ({
     state: {
         conversationsList: [],
         chatMessages: [],
+        lastConvInit: '',
     },
 
 
@@ -16,6 +17,10 @@ export default ({
 
         setChatMessages(state, list) {
             state.chatMessages = list
+        },
+
+        setLastConvo(state, obj) {
+            state.lastConvInit = obj
         }
     },
 
@@ -28,7 +33,6 @@ export default ({
                 })
                 // eslint-disable-next-line no-unused-vars
                 .catch(err => {
-
                 });
         },
 
@@ -45,12 +49,21 @@ export default ({
                 .then( function () {
                     dispatch('getMessagesOfConversation', params.url)
                 })
+        },
+
+        initConversation({commit, rootState}, userToId) {
+            const query = {user1: rootState.userApi.user._id, user2: userToId}
+            axios.post('conversation', query)
+                .then(response => {
+                    commit('setLastConvo', response.data.idConv)
+                })
         }
     },
 
     getters : {
         getConvList: state => state.conversationsList,
-        getMessageList: state=> state.chatMessages
+        getMessageList: state => state.chatMessages,
+        getLastConv: state => state.lastConvInit
     }
 
 })

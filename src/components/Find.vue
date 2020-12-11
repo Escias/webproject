@@ -73,6 +73,13 @@
                   >
                     Like
                   </v-btn>
+                  <v-btn @click="initConversation(user._id)"
+                      elevation="1"
+                      tile
+                      small
+                  >
+                    Chat
+                  </v-btn>
                 </v-col>
               </v-container>
             </v-row>
@@ -99,7 +106,10 @@ export default {
     },
     getUsersWithFilter(){
       this.$store.dispatch("userApi/getListOtherUsers",{sexual_orientation:this.sexuals,conspiracies:this.conspiracies,genders:this.gender})
-
+    },
+    async initConversation(idTo) {
+      await this.$store.dispatch('chatApi/initConversation', idTo)
+      await this.$router.push({name: 'ChatPage', params: {conversation_id: this.lastConv._id}})
     }
   },
   watch:{
@@ -110,7 +120,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      'users': 'userApi/getList'
+      'users': 'userApi/getList',
+      'lastConv': 'chatApi/getLastConv'
     })
   },
   mounted:function(){
