@@ -33,12 +33,12 @@
         <v-col cols="3">
           <v-combobox
               label="add genders"
-              :items="gender"
+              :items="genderList"
               hide-selected
               multiple
               chips
               deletable-chips
-              v-model="genders"
+              v-model="gender"
           ></v-combobox>
         </v-col>
         </div>
@@ -98,7 +98,8 @@ export default {
       return require(`@/assets/alien.png`)
     },
     getUsersWithFilter(){
-      this.$store.dispatch("userApi/getList",{sexual_orientation:this.sexuals,conspiracies:this.conspiracies,genders:this.genders})
+      this.$store.dispatch("userApi/getListOtherUsers",{sexual_orientation:this.sexuals,conspiracies:this.conspiracies,genders:this.gender})
+
     }
   },
   watch:{
@@ -121,7 +122,7 @@ export default {
       justify: 'center',
       sexuals:"",
       conspiracies:"",
-      genders:"",
+      gender:"",
       sexual:[
         'Bisexual',
         'Heterosexual',
@@ -141,9 +142,9 @@ export default {
         'flat earth',
         'illuminati',
       ],
-      gender:[
-        "male",
-        "female",
+      genderList:[
+        "Male",
+        "Female",
       ],
     }
   }
