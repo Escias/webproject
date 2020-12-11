@@ -7,7 +7,7 @@ import axios from 'axios';
 
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:4040/api';
+axios.defaults.baseURL = 'http://163.172.240.193:4040/api';
 
 Vue.prototype.$http = axios;
 const auth_token = localStorage.getItem('token')
