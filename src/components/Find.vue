@@ -7,7 +7,42 @@
           height="80vh"
           class="scroll"
       >
-        <v-flex v-for="(user,index) in users" :key="users[index]">
+        <div id="filters">
+        <v-col cols="3">
+          <v-combobox
+              label="add sexual orientations"
+              :items="sexual"
+              hide-selected
+              multiple
+              chips
+              deletable-chips
+              v-model="sexuals"
+          ></v-combobox>
+        </v-col>
+        <v-col cols="3">
+          <v-combobox
+              label="add conspiracies"
+              :items="conspiracy"
+              hide-selected
+              multiple
+              chips
+              deletable-chips
+              v-model="conspiracies"
+          ></v-combobox>
+        </v-col>
+        <v-col cols="3">
+          <v-combobox
+              label="add genders"
+              :items="genderList"
+              hide-selected
+              multiple
+              chips
+              deletable-chips
+              v-model="gender"
+          ></v-combobox>
+        </v-col>
+        </div>
+        <v-flex v-for="(user,index) in users" v-bind:key="index">
           <v-card>
             <v-row no-gutters>
               <v-container
@@ -49,11 +84,12 @@
 </template>
 
 <script>
+
 import {mapGetters} from "vuex";
 
 export default {
   name: "Find",
-  
+
   methods: {
     getImage(url) {
       if (url !== '' && url.startsWith('http')) {
@@ -61,6 +97,15 @@ export default {
       }
       return require(`@/assets/alien.png`)
     },
+    getUsersWithFilter(){
+      this.$store.dispatch("userApi/getListOtherUsers",{sexual_orientation:this.sexuals,conspiracies:this.conspiracies,genders:this.gender})
+
+    }
+  },
+  watch:{
+    sexuals:function(){this.getUsersWithFilter()},
+    conspiracies:function(){this.getUsersWithFilter()},
+    genders:function(){this.getUsersWithFilter()}
   },
 
   computed: {
@@ -68,11 +113,39 @@ export default {
       'users': 'userApi/getList'
     })
   },
-
+  mounted:function(){
+    this.getUsersWithFilter()
+  },
   data () {
     return {
       alignment: 'center',
       justify: 'center',
+      sexuals:"",
+      conspiracies:"",
+      gender:"",
+      sexual:[
+        'Bisexual',
+        'Heterosexual',
+        'Homosexual',
+        'Androphilia',
+        'Gynephilia',
+        'Bi-curious',
+        'Gray asexual',
+        'Non-heterosexual',
+        'Pansexual',
+        'Queer',
+      ],
+      conspiracy:[
+        'antivax',
+        'anti-covid',
+        '5G',
+        'flat earth',
+        'illuminati',
+      ],
+      genderList:[
+        "Male",
+        "Female",
+      ],
     }
   }
 }
@@ -82,5 +155,9 @@ export default {
 @import "globalCSS.css";
 .profile{
   margin: 1%;
+}
+#filters{
+  display: flex;
+  align-items: center;
 }
 </style>

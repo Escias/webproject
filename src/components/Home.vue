@@ -28,7 +28,7 @@
             <p style="color: white">Retrouvez des profils utilisateur :) </p>
           </v-card>
           <div id="person">
-            <v-flex v-for="(fake,index) in fakes" :key="fakes[index]">
+            <v-flex v-for="(fake,index) in fakes" v-bind:key="index">
                 <v-card
                     elevation="10"
                     width="20vh"

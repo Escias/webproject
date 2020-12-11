@@ -199,7 +199,7 @@
               multiple
               chips
               deletable-chips
-              v-model="interest"
+              v-model="conspiracies"
           ></v-combobox>
         </v-col>
       </v-stepper-content>
@@ -272,6 +272,7 @@ name: "SignUp",
         sexual_orientation: this.sexorient,
         gender: this.sex,
         birthday: this.date,
+        conspiracies:this.conspiracies
       }
       console.log(params)
       this.$store.dispatch("userApi/register", params)
@@ -357,7 +358,7 @@ name: "SignUp",
       sex: "",
       date: "",
       sexorient: "",
-      interest: "",
+      conspiracies: "",
       menu: false,
       valid: true,
       valuePass: true,
