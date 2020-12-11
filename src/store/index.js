@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
 import userApi from './userApi'
+import chatApi from './chatApi'
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
@@ -21,7 +22,8 @@ export default new Vuex.Store({
     },
 
     modules: {
-        userApi: userApi
+        userApi: userApi,
+        chatApi: chatApi
     },
     plugins: [createPersistedState()]
 
